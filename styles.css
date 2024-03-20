@@ -1,0 +1,37 @@
+
+.toCenter {
+    text-align: center;
+    margin-top: 50px;
+}
+
+#dataContainer {
+    border: 1px solid #ccc; /* Borde gris */
+    padding: 20px; /* Espacio interno */
+    margin-top: 20px; /* Espacio superior */
+    width: 80%; /* Ancho del contenedor */
+    margin-left: auto; /* Centrar horizontalmente */
+    margin-right: auto; /* Centrar horizontalmente */
+}
+
+#subDataContainer {
+    margin-left: 20px; /* Ajusta este valor según tus necesidades */
+}
+
+/* Estilos para la lista */
+#buttonList {
+    list-style-type: none;
+    padding: 0;
+}
+
+/* Estilos para los elementos de la lista */
+#buttonList li {
+    margin-bottom: 10px; /* Espacio entre botones */
+}
+
+#buttonList li button {
+    margin-right: 10px; /* Espacio entre el botón y el input */
+}
+
+.is-invalid {
+    border: 1px solid red;
+}
