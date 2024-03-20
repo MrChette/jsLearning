@@ -16,15 +16,15 @@
         <ul id="buttonList">
             <li>
                 <button onclick="getOnePost(document.getElementById('postNumber').value)">getOnePost</button>
-                <input type="text" id="postNumber" name="postNumber">
-            </li>
-            <li>
-                <button onclick="getOnePostWithComment(document.getElementById('postNumberComments').value)">getOnePostWithComment</button>
-                <input type="text" id="postNumberComments" name="postNumberComments">
+                <input type="text" id="postNumber" name="postNumber" placeholder="Id de comentario"> 
             </li>
             <li>
                 <button onclick="getAllPostPaginate(document.getElementById('paginateNumber').value)">getAllPostPaginate</button>
-                <input type="text" id="paginateNumber" name="paginateNumber">
+                <input type="text" id="paginateNumber" name="paginateNumber" placeholder="Cantidad de comentarios">
+            </li>
+            <li>
+                <button onclick="getOnePostWithComment(document.getElementById('postNumberComments').value)">getOnePostWithComment</button>
+                <input type="text" id="postNumberComments" name="postNumberComments" placeholder="Id de comentario"> 
             </li>
             <li><button onclick="getAllPosts()">getAllPost</button></li>
             
@@ -33,9 +33,12 @@
     </div>
 
 
-    <div id="dataContainer">
+    <div id="container">
+        <div id="dataContainer"></div>
         <div id="subDataContainer"></div>
     </div>
+   
+
     
 </body>
 </html>

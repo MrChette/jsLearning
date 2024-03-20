@@ -4,7 +4,7 @@
     margin-top: 50px;
 }
 
-#dataContainer {
+#container{
     border: 1px solid #ccc; /* Borde gris */
     padding: 20px; /* Espacio interno */
     margin-top: 20px; /* Espacio superior */
@@ -13,8 +13,26 @@
     margin-right: auto; /* Centrar horizontalmente */
 }
 
+#dataContainer {
+    border: 1px solid #ccc; /* Borde gris */
+    padding: 20px; /* Espacio interno */
+    width: 80%; /* Ancho del contenedor */
+    margin-left: auto; /* Centrar horizontalmente */
+    margin-right: auto; /* Centrar horizontalmente */
+}
+
 #subDataContainer {
+    border: 1px solid #ff9e9e; /* Borde gris */
+    padding: 20px; /* Espacio interno */
+    width: 60%;
     margin-left: 20px; /* Ajusta este valor según tus necesidades */
+    margin-left: auto; /* Centrar horizontalmente */
+    margin-right: auto; /* Centrar horizontalmente */
+}
+
+#dataContainer:empty, 
+#subDataContainer:empty {
+    display: none; /* Oculta los contenedores si están vacíos */
 }
 
 /* Estilos para la lista */

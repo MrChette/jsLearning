@@ -1,17 +1,33 @@
-
-
-/*
-$(document).ready(function() {
-    testChargeDataAsync(); 
+var dataContainer = '';
+var dataSubContainer = '';
+$( document ).ready(function() {
+    dataContainer = document.getElementById('dataContainer');
+    dataSubContainer = document.getElementById('subDataContainer');
 });
-*/
+
+
+function resetContainers(){
+    dataContainer.innerHTML = '';
+    dataSubContainer.innerHTML = '';
+}
+
+HTMLElement.prototype.addClass = function(className) {
+    this.classList.add(className);
+};
+
+
+HTMLElement.prototype.remClass = function(className) {
+    this.classList.remove(className);
+};
+
+
+//-------------------------FUNCIONES-------------------------//
 
 
 
 async function getOnePost(post){
 
     const postNumberInput = document.getElementById('postNumber');
-    const dataContainer = document.getElementById('dataContainer');
 
     if (post === '') {
         // Si el valor no es un número, añadir la clase isInvalid para aplicar el estilo de CSS
@@ -23,7 +39,7 @@ async function getOnePost(post){
             const getData = await response.json();
 
             //Reseteamos los datos
-            dataContainer.innerHTML = '';
+            resetContainers();
 
             //Añadimos los datos
             dataContainer.innerHTML = `
@@ -40,10 +56,8 @@ async function getOnePost(post){
 }
 
 async function getOnePostWithComment(post){
-
+    
     const postNumberComments = document.getElementById('postNumberComments');
-    const dataContainer = document.getElementById('dataContainer');
-    const dataSubContainer = document.getElementById('subDataContainer');
 
     if (post === '') {
         // Si el valor no es un número, añadir la clase isInvalid para aplicar el estilo de CSS
@@ -55,7 +69,8 @@ async function getOnePostWithComment(post){
             const getData = await response.json();
 
             //Reseteamos los datos
-            dataContainer.innerHTML = '';
+            resetContainers();
+
             //Añadimos los datos
             dataContainer.innerHTML = `
                 <p>userID: ${getData.userId}</p>
@@ -64,25 +79,31 @@ async function getOnePostWithComment(post){
                 <p>body: ${getData.body}</p>
             `;
 
-
             let htmlCommentsString = '';
-            //Obtenemos los comentarios del post
-            const comments = await getCommentOfPost(post);
-            console.log(comments)
-            comments.forEach(data => {
-                htmlCommentsString += `
-                    <p>postId: ${data.postId}</p>
-                    <p>id: ${data.id}</p>
-                    <p>name: ${data.name}</p>
-                    <p>email: ${data.email}</p>
-                    <p>body: ${data.body}</p>
-                    <hr> <!-- Línea divisoria entre cada objeto -->
-                `;
-            });
+            (async () => {
+                try {
+                    const comments = await getCommentOfPost(post); // Cambia el número de post según tus necesidades
+                    //Obtenemos los comentarios del post
+                    console.log(comments)
+                    comments.forEach(data => {
+                        htmlCommentsString += `
+                            <p>postId: ${data.postId}</p>
+                            <p>id: ${data.id}</p>
+                            <p>name: ${data.name}</p>
+                            <p>email: ${data.email}</p>
+                            <p>body: ${data.body}</p>
+                            <hr> <!-- Línea divisoria entre cada objeto -->
+                        `;
+                    });
 
-            dataSubContainer.innerHTML = '';
-            //Metemos los comentarios en el subContainer
-            dataSubContainer.innerHTML = htmlCommentsString;
+                    dataSubContainer.innerHTML = '';
+                    //Metemos los comentarios en el subContainer
+                    dataSubContainer.innerHTML = htmlCommentsString;
+                } catch(error) {
+                    console.error(error);
+                }
+            })();
+
 
         } catch( error ){
             console.error(error)
@@ -103,7 +124,7 @@ async function getCommentOfPost(post){
             data.push(dataItem);
         });
     } catch(error) {
-        console.error(error);
+        return []; // 
     }
 
     return data; // Devolvemos los comentarios obtenidos
@@ -128,8 +149,9 @@ async function getAllPosts(){
             `;
         });
 
-        //Reseteamos dataContainer
-        dataContainer.innerHTML = '';
+        //Reseteamos containers
+        resetContainers();
+
         // Mostrar la cadena HTML en el contenedor
         dataContainer.innerHTML = htmlString;
 
@@ -139,9 +161,9 @@ async function getAllPosts(){
 }
 
 async function getAllPostPaginate(paginate){
-
+    
     const paginateInput = document.getElementById('paginateNumber');
-    const dataContainer = document.getElementById('dataContainer');
+
     if(paginate === ''){
         paginateInput.addClass("is-invalid")
     }
@@ -165,8 +187,8 @@ async function getAllPostPaginate(paginate){
                 `;
             });
     
-            //Reseteamos dataContainer
-            dataContainer.innerHTML = '';
+            //Reseteamos dataContainers
+            resetContainers();
             // Mostrar la cadena HTML en el contenedor
             dataContainer.innerHTML = htmlString;
     
@@ -179,11 +201,3 @@ async function getAllPostPaginate(paginate){
 
 
 
-HTMLElement.prototype.addClass = function(className) {
-    this.classList.add(className);
-};
-
-
-HTMLElement.prototype.remClass = function(className) {
-    this.classList.remove(className);
-};
