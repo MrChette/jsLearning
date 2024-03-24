@@ -5,7 +5,7 @@
 }
 
 #container{
-    border: 1px solid #ccc; /* Borde gris */
+    border: none; /* Borde gris */
     padding: 20px; /* Espacio interno */
     margin-top: 20px; /* Espacio superior */
     width: 80%; /* Ancho del contenedor */

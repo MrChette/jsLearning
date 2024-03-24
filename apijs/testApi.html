@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Tu archivo CSS personalizado -->
+    <link rel="stylesheet" type="text/css" href="/resources/styles.css">
+
+    <!-- jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <!-- Tu script personalizado -->
+    <script src="/scripts/index.js"></script>
+</head>
+<body>
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="toCenter">
+                <ul class="list-unstyled" id="buttonList">
+                    <li class="d-flex align-items-center">
+                        <button class="btn btn-primary mr-2" onclick="getOnePost(document.getElementById('postNumber').value)">getOnePost</button>
+                        <input type="text" id="postNumber" name="postNumber" class="form-control" placeholder="Id de comentario"> 
+                    </li>
+                    <li class="d-flex align-items-center">
+                        <button class="btn btn-primary mr-2" onclick="getAllPostPaginate(document.getElementById('paginateNumber').value)">getAllPostPaginate</button>
+                        <input type="text" id="paginateNumber" name="paginateNumber" class="form-control" placeholder="Cantidad de comentarios">
+                    </li>
+                    <li class="d-flex align-items-center">
+                        <button class="btn btn-primary mr-2" onclick="getOnePostWithComment(document.getElementById('postNumberComments').value)">getOnePostWithComment</button>
+                        <input type="text" id="postNumberComments" name="postNumberComments" class="form-control" placeholder="Id de comentario"> 
+                    </li>
+                    <li class="d-flex align-items-center">
+                        <button class="btn btn-primary mr-2" onclick="getAllPosts()">getAllPost</button>
+                    </li>
+                    
+                    <!-- Agrega más botones según sea necesario -->
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="row justify-content-center mt-1">
+        <div class="col-md-24">
+            <div id="container">
+                <div id="dataContainer"></div>
+                <div id="subDataContainer"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Bootstrap JS (jQuery debe estar incluido antes de esto) -->
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</body>
+</html>
