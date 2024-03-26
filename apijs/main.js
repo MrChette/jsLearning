@@ -6,6 +6,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const navItems = [
     {name: "Post & Comments", loadContent: "/postComments/postCommentsController.html"},
     {name: "Users", loadContent: "/users/userController.html"},
+    {name: "WorldStats", loadContent: "/stats/worldStats/worldStatsController.html"},
   ];
 
    // Populate navigation dynamically
