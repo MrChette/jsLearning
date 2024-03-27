@@ -42,3 +42,12 @@ function loadContent(page) {
       })
       .catch(error => console.error('Error al cargar la página:', error));
 }
+
+
+//Evitar que se sume la altura del main-content con el navBar
+window.onload = function() {
+  var navbarHeight = document.querySelector('nav').offsetHeight;
+  var mainContent = document.getElementById('main-content');
+  var availableHeight = window.innerHeight - navbarHeight;
+  mainContent.style.minHeight = availableHeight + 'px';
+};

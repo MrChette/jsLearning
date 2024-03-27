@@ -4,11 +4,12 @@
     margin-top: 50px;
 }
 
+
 #container{
     border: none; /* Borde gris */
     padding: 20px; /* Espacio interno */
     margin-top: 20px; /* Espacio superior */
-    width: 80%; /* Ancho del contenedor */
+    width: 90%; /* Ancho del contenedor */
     margin-left: auto; /* Centrar horizontalmente */
     margin-right: auto; /* Centrar horizontalmente */
 }
