@@ -28,12 +28,14 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 function loadContent(page) {
+  const container = document.getElementById('main-content');
+  container.replaceChildren()
     fetch(page)
       .then(response => response.text())
       .then(html => {
-        document.getElementById('main-content').innerHTML = html;
+        container.innerHTML = html;
         // Cargar y ejecutar scripts JavaScript asociados a la página cargada
-        const scripts = document.getElementById('main-content').querySelectorAll('script');
+        scripts = container.querySelectorAll('script');
         scripts.forEach(script => {
           const newScript = document.createElement('script');
           newScript.src = script.src;

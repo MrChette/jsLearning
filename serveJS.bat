@@ -1,2 +1,5 @@
+@echo off
+
 cd apijs
-py -m http.server
+
+start cmd /c "py -m http.server

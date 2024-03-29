@@ -1,17 +1,23 @@
 
-const _baseUrl = 'https://d6wn6bmjj722w.population.io:443/1.0/population';
 
-var nav = '';
-nav = document.getElementById("card-container");  
-getPopulationByYearCountryAge()
+
+var _basePopulationUrl = 'https://d6wn6bmjj722w.population.io:443/1.0/population';
+var _localUrl = 'http://localhost:8080'
+countTotalHashtagspost();
+getPopulationByYearCountryAge();
 
 async function getPopulationByYearCountryAge(){
+
+    var leftContainerId = 'getPopulationByYearCountryAgeText'
+    var rightContainerId = 'getPopulationByYearCountryAgeChart'
+    populateCard(leftContainerId,rightContainerId);
+
 
     var _year = 2024;
     var _country = "Spain"
     var _age = 18
     //resetContainers();
-    var url = _baseUrl+"/"+_year+"/"+_country+"/"+_age;
+    var url = _basePopulationUrl+"/"+_year+"/"+_country+"/"+_age;
 
     var labels = []
     var data = []
@@ -44,26 +50,50 @@ async function getPopulationByYearCountryAge(){
     data.push(females) 
     data.push(males) 
 
-    var leftContainerId = 'getPopulationByYearCountryAgeText'
-    var rightContainerId = 'getPopulationByYearCountryAgeChart'
-    populateCard(leftContainerId,rightContainerId);
-    generateDougtnut(labels,data,rightContainerId)
+  
+    generateDougtnut(labels,data,rightContainerId);
 
 }
 
-var myDoughnutChart;
-function generateDougtnut(labels, datas, containerId) {
-    if (myDoughnutChart) {
-        // Destruye el gráfico previo
-        myDoughnutChart.destroy();
+
+async function countTotalHashtagspost(){
+
+    var leftContainerId = 'countTotalHashtagspostText';
+    var rightContainerId = 'countTotalHashtagspostChart';
+
+    populateCard(leftContainerId,rightContainerId);
+ 
+
+    var url = _localUrl+"/hashtags/count";
+    const response = await fetch(url);
+    const datos = await response.json();
+
+    var labels = []
+    var data = []
+
+    for (let clave in datos) {
+        if (datos.hasOwnProperty(clave)) {
+            //labels.push(clave);
+            data.push(datos[clave]);
+        }
     }
+
+    generateDougtnut(labels,data,rightContainerId);
+
+
+}
+
+async function generateDougtnut(labels, datas, containerId) {
+
 
     var backgroundColors = [];
     var hoverBackgroundColors = [];
     // Genera colores aleatorios según la longitud de los datos
+    var color = null;
     for (var i = 0; i < datas.length; i++) {
-        backgroundColors.push(randomColor());
-        hoverBackgroundColors.push(randomColor());
+        color = randomColor();
+        backgroundColors.push(color);
+        hoverBackgroundColors.push(darkenColor(color,-60));
     }
 
     var data = {
@@ -113,11 +143,11 @@ function generateDougtnut(labels, datas, containerId) {
 }
 
 
-function populateCard(leftIdName, rightIdName) {
-    nav = document.getElementById("card-container");
+async function populateCard(leftIdName, rightIdName) {
+    var nav = document.getElementById("card-container");
     // Populate card dynamically
     const rowDiv = document.createElement("div");
-    rowDiv.classList = "row";
+    rowDiv.classList = "row bg-light border rounded-5 mt-5 mb-5";
 
     const col1Div = document.createElement("div");
     col1Div.id = leftIdName;
@@ -133,7 +163,7 @@ function populateCard(leftIdName, rightIdName) {
 
     // Agrega un elemento Canvas dentro del contenedor derecho
     const canvas = document.createElement("canvas");
-    canvas.id = "myChart"; // Puedes asignar un ID al elemento Canvas si es necesario
+    canvas.id = leftIdName+rightIdName; // Puedes asignar un ID al elemento Canvas si es necesario
     col2Div.appendChild(canvas);
 
     rowDiv.appendChild(col1Div);
@@ -149,3 +179,20 @@ function randomColor() {
         var b = Math.floor(Math.random() * 255);
     return 'rgb(' + r + ',' + g + ',' + b + ')';
 }
+
+function darkenColor(color, amount) {
+    // Extraer los componentes RGB del color dado
+    let match = color.match(/rgb\((\d+),\s*(\d+),\s*(\d+)\)/);
+    let r = parseInt(match[1]);
+    let g = parseInt(match[2]);
+    let b = parseInt(match[3]);
+
+    // Disminuir el valor de cada componente RGB
+    r = Math.max(0, r - amount);
+    g = Math.max(0, g - amount);
+    b = Math.max(0, b - amount);
+
+    // Devolver el color ajustado en formato RGB
+    return 'rgb(' + r + ',' + g + ',' + b + ')';
+}
+
