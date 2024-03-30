@@ -15,7 +15,11 @@ public class HashtagService {
         this.hashtagRepository = hashtagRepository;
     }
 
-    public List<Object[]> getCountTotalHashtagspost() {
-        return hashtagRepository.countTotalHashtagspost();
+    public List<Object[]> gettopThreeHashtags() {
+        return hashtagRepository.topThreeHashtags();
+    }
+    
+    public List<Object[]> getCountTotalHashtagspostByUser(Long userId) {
+        return hashtagRepository.countTotalHashtagspostByUser(userId);
     }
 }

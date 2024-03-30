@@ -3,13 +3,17 @@
 
 var _basePopulationUrl = 'https://d6wn6bmjj722w.population.io:443/1.0/population';
 var _localUrl = 'http://localhost:8080'
-countTotalHashtagspost();
+
+var leftContainerId = ''
+var rightContainerId = ''
+getTopThreeHashtags();
 getPopulationByYearCountryAge();
+getAllHashTagsByUsers();
 
 async function getPopulationByYearCountryAge(){
 
-    var leftContainerId = 'getPopulationByYearCountryAgeText'
-    var rightContainerId = 'getPopulationByYearCountryAgeChart'
+    const leftContainerId = randomString();
+    const rightContainerId = randomString();
     populateCard(leftContainerId,rightContainerId);
 
 
@@ -18,9 +22,6 @@ async function getPopulationByYearCountryAge(){
     var _age = 18
     //resetContainers();
     var url = _basePopulationUrl+"/"+_year+"/"+_country+"/"+_age;
-
-    var labels = []
-    var data = []
 
     var femaleCount = 0;
     var maleCount = 0;
@@ -43,6 +44,8 @@ async function getPopulationByYearCountryAge(){
         console.error(error)
     }
 
+    var labels = []
+    var data = []
     
     labels.push("Female")
     labels.push("Male")
@@ -56,11 +59,10 @@ async function getPopulationByYearCountryAge(){
 }
 
 
-async function countTotalHashtagspost(){
+async function getTopThreeHashtags(){
 
-    var leftContainerId = 'countTotalHashtagspostText';
-    var rightContainerId = 'countTotalHashtagspostChart';
-
+    const leftContainerId = randomString();
+    const rightContainerId = randomString();
     populateCard(leftContainerId,rightContainerId);
  
 
@@ -68,23 +70,32 @@ async function countTotalHashtagspost(){
     const response = await fetch(url);
     const datos = await response.json();
 
-    var labels = []
-    var data = []
-
-    for (let clave in datos) {
-        if (datos.hasOwnProperty(clave)) {
-            //labels.push(clave);
-            data.push(datos[clave]);
-        }
-    }
+    const labels = Object.keys(datos);
+    const data = Object.values(datos);
 
     generateDougtnut(labels,data,rightContainerId);
+}
 
 
+async function getAllHashTagsByUsers(){
+
+    const leftContainerId = randomString();
+    const rightContainerId = randomString();
+    populateCard(leftContainerId,rightContainerId);
+ 
+    var useId = 1;
+
+    var url = _localUrl+"/hashtags/count/"+useId;
+    const response = await fetch(url);
+    const datos = await response.json();
+
+    const labels = Object.keys(datos);
+    const data = Object.values(datos);
+
+    generateDougtnut(labels,data,rightContainerId);
 }
 
 async function generateDougtnut(labels, datas, containerId) {
-
 
     var backgroundColors = [];
     var hoverBackgroundColors = [];
@@ -147,7 +158,7 @@ async function populateCard(leftIdName, rightIdName) {
     var nav = document.getElementById("card-container");
     // Populate card dynamically
     const rowDiv = document.createElement("div");
-    rowDiv.classList = "row bg-light border rounded-5 mt-5 mb-5";
+    rowDiv.classList = "row bg-light border rounded-5 mt-5 mb-5 animate__animated animate__zoomIn";
 
     const col1Div = document.createElement("div");
     col1Div.id = leftIdName;
@@ -163,7 +174,7 @@ async function populateCard(leftIdName, rightIdName) {
 
     // Agrega un elemento Canvas dentro del contenedor derecho
     const canvas = document.createElement("canvas");
-    canvas.id = leftIdName+rightIdName; // Puedes asignar un ID al elemento Canvas si es necesario
+    canvas.id = leftIdName+rightIdName; // Asignar ID concatenando tablas para que siempre sean distintos
     col2Div.appendChild(canvas);
 
     rowDiv.appendChild(col1Div);
@@ -194,5 +205,10 @@ function darkenColor(color, amount) {
 
     // Devolver el color ajustado en formato RGB
     return 'rgb(' + r + ',' + g + ',' + b + ')';
+}
+
+function randomString(){
+    const rand = Math.random().toString(16).substr(2, 16); 
+    return rand;
 }
 

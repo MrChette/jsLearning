@@ -54,9 +54,9 @@ async function getOnePostWithComment(post){
 
     if (post === '') {
         // Si el valor no es un número, añadir la clase isInvalid para aplicar el estilo de CSS
-        postNumberComments.addClass('is-invalid');
+        postNumberComments.addClassList('is-invalid animate__animated animate__shakeX');
     } else {
-        postNumberComments.remClass('is-invalid');
+        postNumberComments.remClassList('is-invalid animate__animated animate__shakeX');
         try{
             const response = await fetch('https://jsonplaceholder.typicode.com/posts/'+post);
             const getData = await response.json();
