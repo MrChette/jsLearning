@@ -2,7 +2,6 @@
 
 
 var _basePopulationUrl = 'https://d6wn6bmjj722w.population.io:443/1.0/population';
-var _localUrl = 'http://localhost:8080'
 
 var leftContainerId = ''
 var rightContainerId = ''
@@ -207,8 +206,5 @@ function darkenColor(color, amount) {
     return 'rgb(' + r + ',' + g + ',' + b + ')';
 }
 
-function randomString(){
-    const rand = Math.random().toString(16).substr(2, 16); 
-    return rand;
-}
+
 

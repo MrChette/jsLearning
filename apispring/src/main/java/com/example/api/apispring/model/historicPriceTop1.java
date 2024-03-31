@@ -5,17 +5,16 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@AllArgsConstructor
 @NoArgsConstructor
-@Setter
+@AllArgsConstructor
 @Getter
-public class AdressModel {
-	
-	private String street;
-	private String suite;
-	private String city;
-	private String zipcode;
-	private GeoModel geo;
-	
+@Setter
+public class historicPriceTop1 {
 
+	private Integer id;
+	private Integer idCryto;
+	private Integer month;
+	private Integer year;
+	private Double precio;
+	
 }

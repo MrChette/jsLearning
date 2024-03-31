@@ -1,21 +1,19 @@
 package com.example.api.apispring.model;
 
 import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Setter
 @Getter
-public class AdressModel {
+public class CryptoModel {
 	
-	private String street;
-	private String suite;
-	private String city;
-	private String zipcode;
-	private GeoModel geo;
-	
+	private Long id;
+	private String name;
 
 }

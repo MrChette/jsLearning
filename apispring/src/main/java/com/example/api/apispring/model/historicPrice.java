@@ -1,21 +1,21 @@
 package com.example.api.apispring.model;
 
+import java.sql.Date;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@AllArgsConstructor
 @NoArgsConstructor
-@Setter
+@AllArgsConstructor
 @Getter
-public class AdressModel {
+@Setter
+public class historicPrice {
 	
-	private String street;
-	private String suite;
-	private String city;
-	private String zipcode;
-	private GeoModel geo;
-	
+	private Integer id;
+	private Integer idCrypto;
+	private Double precio;
+	private Date fecha;
 
 }

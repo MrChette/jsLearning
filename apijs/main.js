@@ -7,6 +7,7 @@ document.addEventListener("DOMContentLoaded", function () {
     {name: "Post & Comments", loadContent: "/postComments/postCommentsController.html"},
     {name: "Users", loadContent: "/users/userController.html"},
     {name: "WorldStats", loadContent: "/stats/worldStats/worldStatsController.html"},
+    {name: "Cryptos", loadContent: "/stats/crypto/cryptoController.html"},
   ];
 
    // Populate navigation dynamically
