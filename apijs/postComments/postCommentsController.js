@@ -193,4 +193,68 @@ async function getAllPostPaginate(paginate){
 }
 
 
+const getAllPostByPromise = () => {
+    const dataContainer = document.getElementById('dataContainer');
+    return new Promise((resolve,reject) => {
+      
+        fetch('https://jsonplaceholder.typicode.com/posts')
+            .then(response => {
+                if (!response.ok){
+                    throw new Error('Response is not ok')
+                }
+                return response.json();
+            })
+            .then(reponseData => {
+
+                let htmlString = '';
+                reponseData.forEach(data => {
+                    htmlString += `
+                        <p>userID: ${data.userId}</p>
+                        <p>id: ${data.id}</p>
+                        <p>title: ${data.title}</p>
+                        <p>body: ${data.body}</p>
+                        <hr> <!-- Línea divisoria entre cada objeto -->
+                    `;
+                });
+        
+                //Reseteamos containers
+                resetContainers();
+        
+                // Mostrar la cadena HTML en el contenedor
+                dataContainer.innerHTML = htmlString;
+            })
+            .catch(error => {
+                console.error('Error with the operation', error);
+                reject(error);
+            })
+
+    })
+};
+
+
+/*
+    ^ SO THE PROMISE STRUCTURE IS : 
+    
+    *   return new Promise((resolve,reject) => {
+    *       fetch('https://exampleURL/exampleEndpoint.com')
+    *           .then(response => {
+    *               if(!response.ok){               --ERROR response da fallo(404,500) lanza error, se para la ejecucion
+    *                   throw new Error('Error') 
+    *               }
+    *               return response.json()          --OK (200-299), convierte el response en json
+    *           })
+    *           .then(responseData => {
+    *               //uso de los datos              --Los datos json se almacenan en la variable x -> (responseData en este caso)
+    *           })
+    *           .catch(error => {
+    *               reject(error)                   --Si ocurre un error en la ejecucion de datos de la promesa
+    *           })
+    *   })
+
+*/
+
+
+
+
+
 
